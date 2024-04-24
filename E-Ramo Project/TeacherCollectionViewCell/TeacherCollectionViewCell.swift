@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TeacherCollectionDelegate: AnyObject{
+    func didSelect(cell: TeacherCollectionViewCell,sender: UIButton)
+    func didntSelect(cell: TeacherCollectionViewCell,sender: UIButton)
+}
 class TeacherCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var teacherNumber: UILabel!
     @IBOutlet weak var bookingLabel: UILabel!
@@ -24,6 +28,7 @@ class TeacherCollectionViewCell: UICollectionViewCell {
     static func uiNib()-> UINib{
         return UINib(nibName: TeacherCollectionViewCell.identifier, bundle: .main)
     }
+    weak var delegate: TeacherCollectionDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -44,6 +49,7 @@ class TeacherCollectionViewCell: UICollectionViewCell {
             self.bookingLabel.text = "Booked"
             self.bookingBtnView.backgroundColor = #colorLiteral(red: 0.00648642797, green: 0.4581286907, blue: 0.1080923453, alpha: 1)
             self.bookBtn.titleLabel?.text = ""
+            delegate?.didSelect(cell: self, sender: sender)
         }else{
             teacherView.layer.borderColor = UIColor.clear.cgColor
             teacherView.layer.borderWidth = 0
@@ -52,6 +58,8 @@ class TeacherCollectionViewCell: UICollectionViewCell {
             self.bookingLabel.text = "Book"
             self.bookingBtnView.backgroundColor = #colorLiteral(red: 0.1620337069, green: 0.4771643281, blue: 0.8168808818, alpha: 1)
             self.bookBtn.titleLabel?.text = ""
+            delegate?.didntSelect(cell: self, sender: sender)
+
         }
     }
 }

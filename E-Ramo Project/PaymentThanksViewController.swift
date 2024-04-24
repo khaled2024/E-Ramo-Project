@@ -23,5 +23,11 @@ class PaymentThanksViewController: UIViewController {
         homeVC.modalPresentationStyle = .fullScreen
         self.present(homeVC, animated: true)
     }
+    @IBAction func backBtnTapped(_ sender: UIButton) {
+        let paymentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SecondPaymentViewController")as! SecondPaymentViewController
+        paymentVC.modalPresentationStyle = .fullScreen
+        self.present(paymentVC, animated: true)
+    }
+    
 
 }
